@@ -1,0 +1,7 @@
+# Local-dev secrets for `wrangler dev`. Copy to `.dev.vars` and fill in.
+# `.dev.vars` is gitignored. In production use `wrangler secret put` instead.
+SPOTIFY_CLIENT_ID="your-spotify-client-id"
+SPOTIFY_CLIENT_SECRET="your-spotify-client-secret"
+COOKIE_ENCRYPTION_KEY="run: openssl rand -hex 32"
+# Optional: comma-separated allowlist of Spotify account emails. Empty = open to anyone.
+ALLOWED_EMAILS=""

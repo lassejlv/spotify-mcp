@@ -1,0 +1,42 @@
+/**
+ * Wrangler config for the Spotify remote MCP server.
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ *
+ * Secrets (set with `npx wrangler secret put <NAME>`):
+ *   SPOTIFY_CLIENT_ID      - your Spotify app's Client ID
+ *   SPOTIFY_CLIENT_SECRET  - your Spotify app's Client Secret
+ *   COOKIE_ENCRYPTION_KEY  - random string used to sign approval cookies
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "spotify-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-10",
+  "compatibility_flags": ["nodejs_compat"],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["SpotifyMCP"]
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MCP_OBJECT",
+        "class_name": "SpotifyMCP"
+      }
+    ]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "OAUTH_KV",
+      "id": "25c6e83a32334ac2bc2c98065b15b2a4"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "dev": {
+    "port": 8788
+  }
+}
